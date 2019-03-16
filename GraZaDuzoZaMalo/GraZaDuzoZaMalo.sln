@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraMonolitycznie", "GraMonolitycznie\GraMonolitycznie.csproj", "{AEE33F98-9D27-427D-B601-8FC7A0ADA992}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AEE33F98-9D27-427D-B601-8FC7A0ADA992}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEE33F98-9D27-427D-B601-8FC7A0ADA992}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEE33F98-9D27-427D-B601-8FC7A0ADA992}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEE33F98-9D27-427D-B601-8FC7A0ADA992}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ACE2DC15-F9D6-4B65-AB4D-15E0311468A5}
+	EndGlobalSection
+EndGlobal
