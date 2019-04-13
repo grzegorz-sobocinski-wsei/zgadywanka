@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GraMonolitycznie
+﻿namespace GraMonolitycznie
 {
     public class Program
     {
@@ -9,10 +7,5 @@ namespace GraMonolitycznie
             // Creates new game 
             GameLogic gameLogic = new GameLogic();
         }
-
-
-       
-
     }
-    
 }
