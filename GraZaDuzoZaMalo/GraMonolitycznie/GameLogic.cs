@@ -10,7 +10,7 @@ namespace GraMonolitycznie
         private int randomNumber;
         private Random random;
         private int userGuess;
-        private const int questionsLimit = 7;
+        private const int QuestionsLimit = 7;
         #endregion
         #region Constructor
         /// <summary>
@@ -53,7 +53,7 @@ namespace GraMonolitycznie
         {
             CheckIfGuessIsNumber(ReadLine());
 
-            if (User.NumberOfQuestions < questionsLimit)
+            if (User.NumberOfQuestions < QuestionsLimit)
                 AskUser();
             else
                 GameOver();
