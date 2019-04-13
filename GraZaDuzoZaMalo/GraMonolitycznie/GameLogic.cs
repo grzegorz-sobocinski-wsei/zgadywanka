@@ -5,18 +5,25 @@ namespace GraMonolitycznie
 {
     public class GameLogic
     {
+        #region Private Fields
         private User User;
         private int randomNumber;
         private Random random;
         private int userGuess;
         private const int questionsLimit = 7;
-
+        #endregion
+        #region Constructor
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public GameLogic()
         {
             random = new Random();
         }
+        #endregion
+        #region Public Methods
         /// <summary>
-        /// Asks for user name, ran at the beginning of the game
+        /// Asks for user name, ran at the beginning of the game. Exposed as public to increase code readability.
         /// </summary>
         public void InitializeGame()
         {
@@ -28,8 +35,10 @@ namespace GraMonolitycznie
 
             StartGame();
         }
+        #endregion
+        #region Private Methods
         /// <summary>
-        /// Begins new round 
+        /// Begins new round.
         /// </summary>
         private void StartGame()
         {
@@ -37,6 +46,9 @@ namespace GraMonolitycznie
             WriteLine("I'm thinking of a number between 1-100, what number is it?");
             AskUser();
         }
+        /// <summary>
+        /// Questions the user. 
+        /// </summary>
         private void AskUser()
         {
             CheckIfGuessIsNumber(ReadLine());
@@ -71,10 +83,13 @@ namespace GraMonolitycznie
 
             WriteLine("That wasn't a number!");
         }
+        /// <summary>
+        /// Checks how close to the answer user's answer was.
+        /// </summary>
         private void CheckNumber()
         {
             User.NumberOfQuestions++;
-            
+
             if (randomNumber < userGuess)
                 WriteLine("That's too much!");
             if (randomNumber > userGuess)
@@ -82,6 +97,9 @@ namespace GraMonolitycznie
             if (randomNumber == userGuess)
                 GameWon();
         }
+        /// <summary>
+        /// User won the game. Starts new game. 
+        /// </summary>
         private void GameWon()
         {
             WriteLine(string.Format("That's correct! I was thinking of a {0}. You got it by {1} try. Let's begin a new game!\n", randomNumber, User.NumberOfQuestions));
@@ -89,7 +107,7 @@ namespace GraMonolitycznie
             StartGame();
         }
         /// <summary>
-        /// User have no more questions left
+        /// Resets the game because user had no more quetsions left 
         /// </summary>
         private void GameOver()
         {
@@ -97,7 +115,7 @@ namespace GraMonolitycznie
             StartGame();
         }
         /// <summary>
-        /// Resets the game values to defaults
+        /// Resets the game values to defaults.
         /// </summary>
         private void ResetGame()
         {
@@ -105,6 +123,9 @@ namespace GraMonolitycznie
             User.NumberOfQuestions = 0;
             User.NumberOfGames++;
         }
+        /// <summary>
+        /// Informs the user about his score and closes the application.
+        /// </summary>
         private void EndGame()
         {
             WriteLine(string.Format("You played {0} games and won {1}", User.NumberOfGames, User.NumberOfWins));
@@ -112,5 +133,6 @@ namespace GraMonolitycznie
             // Close console window.
             Environment.Exit(0);
         }
+        #endregion
     }
 }

@@ -10,6 +10,7 @@ namespace GraMonolitycznie
         public int NumberOfWins;
         public int NumberOfGames;
         #endregion
+        #region Constructor
         public User(string name)
         {
             // Guard clause
@@ -18,7 +19,6 @@ namespace GraMonolitycznie
 
             Name = name;
         }
-
-
+        #endregion
     }
 }
