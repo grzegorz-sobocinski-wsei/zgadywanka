@@ -17,7 +17,6 @@ namespace GraMonolitycznie
                 throw new ArgumentNullException("name");
 
             Name = name;
-        
         }
 
 

@@ -6,6 +6,8 @@
         {
             // Creates new game 
             GameLogic gameLogic = new GameLogic();
+            // Starts game
+            gameLogic.InitializeGame();
         }
     }
 }

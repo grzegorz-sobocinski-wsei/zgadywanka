@@ -5,7 +5,7 @@ namespace GraMonolitycznie
 {
     public class GameLogic
     {
-        public User User;
+        private User User;
         private int randomNumber;
         private Random random;
         private int userGuess;
@@ -14,14 +14,14 @@ namespace GraMonolitycznie
         public GameLogic()
         {
             random = new Random();
-            InitializeGame();
         }
         /// <summary>
         /// Asks for user name, ran at the beginning of the game
         /// </summary>
-        private void InitializeGame()
+        public void InitializeGame()
         {
-            WriteLine("Welcome! What's your name?");
+            WriteLine("Welcome! \nIf you want to quit and see your score " +
+                "then type in \"END\"." + "\nWhat's your name?");
 
             // Create new player
             User = new User(ReadLine());
@@ -56,6 +56,12 @@ namespace GraMonolitycznie
             // Guard clause
             if (userAnswer == null)
                 throw new Exception("userAnswer");
+
+            if (userAnswer == "END")
+            {
+                EndGame();
+                return;
+            }
 
             if (int.TryParse(userAnswer, out userGuess))
             {
@@ -98,6 +104,13 @@ namespace GraMonolitycznie
             randomNumber = random.Next(0, 100);
             User.NumberOfQuestions = 0;
             User.NumberOfGames++;
+        }
+        private void EndGame()
+        {
+            WriteLine(string.Format("You played {0} games and won {1}", User.NumberOfGames, User.NumberOfWins));
+            ReadLine();
+            // Close console window.
+            Environment.Exit(0);
         }
     }
 }
