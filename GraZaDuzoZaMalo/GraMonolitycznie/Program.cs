@@ -1,8 +1,9 @@
 ﻿using System;
+using static System.Console;
 
 namespace GraMonolitycznie
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -10,6 +11,8 @@ namespace GraMonolitycznie
         }
 
 
+       
 
     }
+    
 }
