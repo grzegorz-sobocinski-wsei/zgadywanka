@@ -1,5 +1,4 @@
 ﻿using System;
-using static System.Console;
 
 namespace GraMonolitycznie
 {
@@ -7,7 +6,8 @@ namespace GraMonolitycznie
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Witaj");
+            // Creates new game 
+            GameLogic gameLogic = new GameLogic();
         }
 
 

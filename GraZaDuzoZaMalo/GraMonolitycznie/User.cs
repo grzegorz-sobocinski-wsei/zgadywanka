@@ -8,11 +8,9 @@ namespace GraMonolitycznie
 {
     public class User
     {
-        #region Private Fields
-        #endregion
         #region Public Properties
         public string Name;
-        public int NumberOfQuestionsLeft;
+        public int NumberOfQuestions;
         public int NumberOfWins;
         public int NumberOfGames;
         #endregion
@@ -23,6 +21,7 @@ namespace GraMonolitycznie
                 throw new ArgumentNullException("name");
 
             Name = name;
+        
         }
 
 
