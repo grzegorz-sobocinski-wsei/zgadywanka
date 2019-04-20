@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraMonolitycznie", "GraMonolitycznie\GraMonolitycznie.csproj", "{AEE33F98-9D27-427D-B601-8FC7A0ADA992}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameLogic", "GameLogic\GameLogic.csproj", "{1D664382-9E73-4646-BD04-5D571CC7BFDB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{AEE33F98-9D27-427D-B601-8FC7A0ADA992}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEE33F98-9D27-427D-B601-8FC7A0ADA992}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEE33F98-9D27-427D-B601-8FC7A0ADA992}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D664382-9E73-4646-BD04-5D571CC7BFDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D664382-9E73-4646-BD04-5D571CC7BFDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D664382-9E73-4646-BD04-5D571CC7BFDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D664382-9E73-4646-BD04-5D571CC7BFDB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

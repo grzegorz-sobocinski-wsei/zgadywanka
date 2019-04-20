@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GraMonolitycznie
+namespace GameLogic
 {
     public class User
     {
@@ -14,10 +14,7 @@ namespace GraMonolitycznie
         public User(string name)
         {
             // Guard clause
-            if (name == null)
-                throw new ArgumentNullException("name");
-
-            Name = name;
+            Name = name ?? throw new ArgumentNullException("name");
         }
         #endregion
     }
