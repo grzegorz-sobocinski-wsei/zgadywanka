@@ -7,12 +7,18 @@ namespace GameLogic
     /// </summary>
     public abstract class BaseGame
     {
+        #region Constant Values
+        private const int MaximalGuess = 100;
+        private const int MinimalGuess = 0;
+        private const int QuestionsLimit = 7;
+        #endregion
+        #region Private Fields
+        private int userGuess;
+        #endregion
         #region Public Properties
         public User User;
-        public int randomNumber;
-        public Random random;
-        public int userGuess;
-        public const int QuestionsLimit = 7;
+        public Random Random;
+        public int RandomNumber;
         /// <summary>
         /// Contains platform specific notifications for the user.
         /// </summary>
@@ -54,7 +60,7 @@ namespace GameLogic
             // Guard clause
             if (answer == null)
                 throw new ArgumentNullException("answer");
-            
+
             if (answer == "END")
             {
                 EndGame();
@@ -64,13 +70,13 @@ namespace GameLogic
             // Check if user answer is a number within 0-100
             int.TryParse(answer, out int number);
 
-            if (number >= 0 && number <= 100)
+            if (number >= MinimalGuess && number <= MaximalGuess)
             {
                 userGuess = number;
                 CheckNumber();
                 return;
             }
-            
+
             Notifications.InputWasntNumberText();
         }
         /// <summary>
@@ -79,12 +85,12 @@ namespace GameLogic
         public virtual void CheckNumber()
         {
             User.NumberOfQuestions++;
-   
-            if (randomNumber < userGuess)
+
+            if (RandomNumber < userGuess)
                 Notifications.NumberWasTooBigText();
-            if (randomNumber > userGuess)
+            if (RandomNumber > userGuess)
                 Notifications.NumberWasTooSmallText();
-            if (randomNumber == userGuess)
+            if (RandomNumber == userGuess)
                 GameWon();
         }
         /// <summary>
@@ -100,7 +106,6 @@ namespace GameLogic
         /// </summary>
         public virtual void GameOver()
         {
-            // 100%
             Notifications.GameOverText();
             StartGame();
         }
@@ -109,8 +114,7 @@ namespace GameLogic
         /// </summary>
         public virtual void ResetGame()
         {
-            // 100%
-            randomNumber = random.Next(0, 100);
+            RandomNumber = Random.Next(MinimalGuess, MaximalGuess);
             User.NumberOfQuestions = 0;
             User.NumberOfGames++;
         }

@@ -12,7 +12,7 @@ namespace ConsoleGame
         /// </summary>
         public Game()
         {
-            random = new Random();
+            Random = new Random();
             Notifications = new Notifications();
         }
         #endregion
@@ -47,7 +47,7 @@ namespace ConsoleGame
 
         public override void GameWon()
         {
-            Notifications.GameWonText(randomNumber, User.NumberOfQuestions);
+            Notifications.GameWonText(RandomNumber, User.NumberOfQuestions);
             base.GameWon();
         }
 

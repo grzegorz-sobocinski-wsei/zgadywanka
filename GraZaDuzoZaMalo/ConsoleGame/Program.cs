@@ -5,9 +5,9 @@
         static void Main(string[] args)
         {
             // Creates new game 
-            Game game = new Game();
+            Game Game = new Game();
             // Starts game
-            game.InitializeGame();
+            Game.InitializeGame();
         }
     }
 }
