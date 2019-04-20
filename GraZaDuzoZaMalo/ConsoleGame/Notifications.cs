@@ -26,6 +26,12 @@ namespace ConsoleGame
             WriteLine("That wasn't a number!");
         }
 
+        public void NameIsEmpty()
+        {
+            WriteLine("You have to type in your name!");
+            WriteLine("Let's try again, shall we?");
+        }
+
         public void NumberWasTooBigText()
         {
             WriteLine("That's too much!");

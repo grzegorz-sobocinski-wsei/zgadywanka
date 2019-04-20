@@ -66,11 +66,11 @@ namespace GameLogic
                 EndGame();
                 return;
             }
-
+            
             // Check if user answer is a number within 0-100
             int.TryParse(answer, out int number);
 
-            if (number >= MinimalGuess && number <= MaximalGuess)
+            if (number >= MinimalGuess && number <= MaximalGuess && !string.IsNullOrEmpty(answer))
             {
                 userGuess = number;
                 CheckNumber();

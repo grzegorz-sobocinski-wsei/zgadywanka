@@ -55,7 +55,16 @@ namespace ConsoleGame
         {
             Notifications.WelcomeText();
 
-            User = new User(ReadLine());
+            string userName = ReadLine();
+
+            // User's name cannot be empty.
+            if (!string.IsNullOrEmpty(userName))
+                User = new User(ReadLine());
+            else
+            {
+                Notifications.NameIsEmpty();
+                InitializeGame();
+            }
 
             base.InitializeGame();
         }

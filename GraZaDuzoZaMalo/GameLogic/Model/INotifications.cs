@@ -10,5 +10,6 @@
         void GameWonText(int randomNumber, int numberOfQuestions);
         void GameOverText();
         void ScoreInformationText(int numberOfGames, int numberOfWins);
+        void NameIsEmpty();
     }
 }
