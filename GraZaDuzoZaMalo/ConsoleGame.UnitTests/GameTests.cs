@@ -1,25 +1,24 @@
 ﻿using NUnit.Framework;
 using System;
+using Moq;
 
 namespace ConsoleGame.UnitTests
 {
     [TestFixture]
     public class GameTests
     {
-        private Game game;
+        private Mock<Game> game;
         [SetUp]
         public void SetUp()
         {
-            game = new Game();
+            game = new Mock<Game>();
         }
         [Test]
         public void CheckIfGuessIsNumber_AnswerIsNull_ReturnArgumentNullException()
         {
-            // Act
-            var result = Assert.Throws<ArgumentNullException>(() => game.CheckIfGuessIsNumber(null));
-
             // Assert
-            Assert.That(result.ParamName, Is.EqualTo("answer"));
+            game.Setup(game => game.CheckIfGuessIsNumber(null)).Throws<ArgumentNullException>();
+            
         }
     }
 }
