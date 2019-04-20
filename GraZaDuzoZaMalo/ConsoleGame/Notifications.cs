@@ -1,7 +1,7 @@
 ﻿using GameLogic;
 using static System.Console;
 
-namespace GraMonolitycznie
+namespace ConsoleGame
 {
     public class Notifications : INotifications
     {

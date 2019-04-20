@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{AEE33F98-9D27-427D-B601-8FC7A0ADA992}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>GraMonolitycznie</RootNamespace>
-    <AssemblyName>GraMonolitycznie</AssemblyName>
+    <RootNamespace>ConsoleGame</RootNamespace>
+    <AssemblyName>ConsoleGame</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameLogic.cs" />
+    <Compile Include="Game.cs" />
     <Compile Include="Notifications.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

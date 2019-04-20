@@ -1,20 +1,21 @@
 ﻿using GameLogic;
 using System;
 using static System.Console;
-namespace GraMonolitycznie
+
+namespace ConsoleGame
 {
-    public class GameLogic : BaseGame
+    public class Game : BaseGame
     {
         #region Constructor
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public GameLogic()
+        public Game()
         {
             random = new Random();
             Notifications = new Notifications();
         }
-
+        #endregion
         public override void AskUser()
         {
             CheckIfGuessIsNumber(ReadLine());
@@ -22,9 +23,9 @@ namespace GraMonolitycznie
             base.AskUser();
         }
 
-        public override void CheckIfGuessIsNumber(string userAnswer)
+        public override void CheckIfGuessIsNumber(string answer)
         {
-            base.CheckIfGuessIsNumber(userAnswer);
+            base.CheckIfGuessIsNumber(answer);
         }
 
         public override void CheckNumber()
@@ -68,7 +69,6 @@ namespace GraMonolitycznie
         {
             base.StartGame();
         }
-        #endregion
 
     }
 }

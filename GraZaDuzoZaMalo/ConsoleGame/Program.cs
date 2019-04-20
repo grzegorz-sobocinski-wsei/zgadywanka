@@ -1,13 +1,13 @@
-﻿namespace GraMonolitycznie
+﻿namespace ConsoleGame
 {
     public class Program
     {
         static void Main(string[] args)
         {
             // Creates new game 
-            GameLogic gameLogic = new GameLogic();
+            Game game = new Game();
             // Starts game
-            gameLogic.InitializeGame();
+            game.InitializeGame();
         }
     }
 }

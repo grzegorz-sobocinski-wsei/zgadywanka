@@ -49,20 +49,20 @@ namespace GameLogic
         /// Check if the input was an number.
         /// </summary>
         /// <param name="userAnswer"></param>
-        public virtual void CheckIfGuessIsNumber(string userAnswer)
+        public virtual void CheckIfGuessIsNumber(string answer)
         {
             // Guard clause
-            if (userAnswer == null)
-                throw new Exception("userAnswer");
+            if (answer == null)
+                throw new ArgumentNullException("answer");
             
-            if (userAnswer == "END")
+            if (answer == "END")
             {
                 EndGame();
                 return;
             }
 
             // Check if user answer is a number within 0-100
-            int.TryParse(userAnswer, out int number);
+            int.TryParse(answer, out int number);
 
             if (number >= 0 && number <= 100)
             {
