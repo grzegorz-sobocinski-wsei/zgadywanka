@@ -5,6 +5,11 @@ namespace ConsoleGame
 {
     public class Notifications : INotifications
     {
+        /// <summary>
+        /// Not used in this platform, however needed for the WPF and XAML projects.
+        /// </summary>
+        public string Notification { get; set; }
+
         public void FirstQuestionText()
         {
             WriteLine("I'm thinking of a number between 0-100, try to guess it!");
@@ -28,8 +33,7 @@ namespace ConsoleGame
 
         public void NameIsEmpty()
         {
-            WriteLine("You have to type in your name!");
-            WriteLine("Let's try again, shall we?");
+            WriteLine("You have to type in your name!\nLet's try again, shall we?");
         }
 
         public void NumberWasTooBigText()

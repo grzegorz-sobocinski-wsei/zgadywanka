@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleGame", "ConsoleGame\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleGame.UnitTests", "ConsoleGame.UnitTests\ConsoleGame.UnitTests.csproj", "{AED65CBE-BC64-4BC5-9EEA-A7B385173A9A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFGame", "WPFGame\WPFGame.csproj", "{38A70180-7CDB-4E4E-BA0C-59CA4AE1BA86}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{AED65CBE-BC64-4BC5-9EEA-A7B385173A9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AED65CBE-BC64-4BC5-9EEA-A7B385173A9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AED65CBE-BC64-4BC5-9EEA-A7B385173A9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38A70180-7CDB-4E4E-BA0C-59CA4AE1BA86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38A70180-7CDB-4E4E-BA0C-59CA4AE1BA86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38A70180-7CDB-4E4E-BA0C-59CA4AE1BA86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38A70180-7CDB-4E4E-BA0C-59CA4AE1BA86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

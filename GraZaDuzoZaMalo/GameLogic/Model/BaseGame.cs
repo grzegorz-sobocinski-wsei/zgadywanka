@@ -1,11 +1,12 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace GameLogic
 {
     /// <summary>
-    /// Base logic of the game.
+    /// Base logic of the game. Implements INotifyPropertyChanged for WPF and Xamarin project. 
     /// </summary>
-    public abstract class BaseGame
+    public abstract class BaseGame : INotifyPropertyChanged
     {
         #region Constant Values
         private const int MaximalGuess = 100;
@@ -16,13 +17,18 @@ namespace GameLogic
         private int userGuess;
         #endregion
         #region Public Properties
-        public User User;
-        public Random Random;
-        public int RandomNumber;
+        public User User { get; set; }
+        public Random Random { get; set; }
+        public int RandomNumber { get; set; }
+        /// <summary>
+        /// True if console, false if WPF
+        /// </summary>
+        public bool TypeOfGame { get; set; }
         /// <summary>
         /// Contains platform specific notifications for the user.
         /// </summary>
-        public INotifications Notifications;
+        public INotifications Notifications { get;set; }
+
         #endregion
         #region Virtual Methods
         /// <summary>
@@ -46,10 +52,22 @@ namespace GameLogic
         /// </summary>
         public virtual void AskUser()
         {
-            if (User.NumberOfQuestions < QuestionsLimit)
-                AskUser();
+            // True if console game
+            // False if WPF game
+            if(TypeOfGame)
+            {
+                if (User.NumberOfQuestions < QuestionsLimit)
+                    AskUser();
+                else
+                    GameOver();
+            }
             else
-                GameOver();
+            {
+                if (User.NumberOfQuestions < QuestionsLimit)
+                    return;
+                else
+                    GameOver();
+            }
         }
         /// <summary>
         /// Check if the input was an number.
@@ -124,6 +142,13 @@ namespace GameLogic
         public virtual void EndGame()
         {
             Environment.Exit(0);
+        }
+        #endregion
+        #region PropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
     }

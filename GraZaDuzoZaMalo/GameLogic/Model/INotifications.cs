@@ -2,6 +2,7 @@
 {
     public interface INotifications
     {
+        string Notification { get; set; }
         void WelcomeText();
         void FirstQuestionText();
         void InputWasntNumberText();

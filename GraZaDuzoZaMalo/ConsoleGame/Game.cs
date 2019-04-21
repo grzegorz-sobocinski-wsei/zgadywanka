@@ -12,6 +12,7 @@ namespace ConsoleGame
         /// </summary>
         public Game()
         {
+            TypeOfGame = true;
             Random = new Random();
             Notifications = new Notifications();
         }
