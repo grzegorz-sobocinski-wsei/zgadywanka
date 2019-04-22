@@ -14,7 +14,7 @@
         /// <summary>
         /// Used after registering and losing a game.
         /// </summary>
-        public static string Start = "Start new game";
+        public static string Start = "Start";
 
     }
 }

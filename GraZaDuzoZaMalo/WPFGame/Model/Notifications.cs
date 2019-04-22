@@ -24,6 +24,7 @@ namespace WPFGame
             get { return notification; }
             set { notification = value.Replace(Space, DoubleSpace); }
         }
+        
         #endregion
         #region Methods
         public void FirstQuestionText()
