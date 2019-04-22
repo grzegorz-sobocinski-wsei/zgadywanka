@@ -8,6 +8,7 @@
     Title="MainWindow"
     Width="450"
     Height="600"
+    Icon="Resources\Images\Icon.png"
     mc:Ignorable="d">
     <!--  Main window  -->
     <local:GamePage />
