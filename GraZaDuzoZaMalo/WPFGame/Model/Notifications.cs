@@ -4,7 +4,21 @@ namespace WPFGame
 {
     public class Notifications : INotifications
     {
-        public string Notification { get; set; }
+        /// <summary>
+        /// Constants required for better look of the ArcadeClassic font.
+        /// Without them notifications look like one word.
+        /// </summary>
+        private const string Space = " ";
+        private const string DoubleSpace = "  ";
+
+        private string notification;
+
+        public string Notification
+        {
+            get { return notification; }
+            set { notification = value.Replace(Space, DoubleSpace) }
+        }
+
 
         public void FirstQuestionText()
         {
@@ -14,6 +28,7 @@ namespace WPFGame
         public void GameOverText(int randomNumber)
         {
             Notification = string.Format("Sorry, you have no more questions left. I was thinking of {0}. Let's start again!", randomNumber);
+
         }
 
         public void GameWonText(int randomNumber, int numberOfQuestions)
