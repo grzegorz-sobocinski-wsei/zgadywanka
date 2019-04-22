@@ -61,6 +61,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\ButtonTexts.cs" />
+    <Compile Include="ValueConverters\ButtonTextValueConverter.cs" />
     <Compile Include="ViewModel\Base\RelayCommand.cs" />
     <Compile Include="ViewModel\GameViewModel.cs" />
     <Compile Include="View\GamePage.xaml.cs" />

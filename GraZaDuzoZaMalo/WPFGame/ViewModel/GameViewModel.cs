@@ -6,9 +6,9 @@ namespace WPFGame
     public class GameViewModel : BaseGame
     {
         #region Public Properties
-        public string UserAnswer { get; set; }
-        public string Notification { get; set; } 
-        public string ButtonText { get; set; }
+        public string UserAnswer { get; set; } = string.Empty;
+        public string Notification { get; set; }
+        public string ButtonText { get; set; } = ButtonTexts.Register;
         
         #endregion
         #region Commands
@@ -20,34 +20,31 @@ namespace WPFGame
         /// </summary>
         public GameViewModel()
         {
+            // Flag. False, because it's WPF project.
             TypeOfGame = false;
+
+            // Initialization 
             Random = new Random();
             Notifications = new Notifications();
-            ButtonText = "Register";
-
-            InitializeGame();
-            UserAnswer = string.Empty;
-            Notification = Notifications.Notification;
-
-            // Initialize commands
             UserAnswerCommand = new RelayCommand(() => ButtonClicked());
-            
+            InitializeGame();
+            Notification = Notifications.Notification;            
         }
         #endregion
         public void ButtonClicked()
         {
-            if (ButtonText == "Register")
+            if (ButtonText == ButtonTexts.Register)
             {
-                ButtonText = "Submit answer";
+                ButtonText = ButtonTexts.Submit;
                 RegisterUser();
             }
-            if (ButtonText == "Start new game")
+            if (ButtonText == ButtonTexts.Start)
             {
                 Notification = Notifications.Notification;
-                ButtonText = "Submit answer";
+                ButtonText = ButtonTexts.Submit;
                 base.InitializeGame();
             }
-            if (ButtonText == "Submit answer" && UserAnswer != string.Empty)
+            if (ButtonText == ButtonTexts.Submit && UserAnswer != string.Empty)
             {
                 AskUser();
             }
@@ -61,7 +58,7 @@ namespace WPFGame
 
             base.AskUser();
 
-            if (ButtonText == "Start new game")
+            if (ButtonText == ButtonTexts.Start)
             {
                 UserAnswer = string.Empty;
                 return;
@@ -91,14 +88,14 @@ namespace WPFGame
         public override void GameOver()
         {
             Notifications.GameOverText();
-            ButtonText = "Start new game";
+            ButtonText = ButtonTexts.Start;
             Notification = Notifications.Notification;
         }
 
         public override void GameWon()
         {
             Notifications.GameWonText(RandomNumber, User.NumberOfQuestions);
-            ButtonText = "Start new game";
+            ButtonText = ButtonTexts.Start;
             ResetGame();
         }
 
@@ -132,7 +129,7 @@ namespace WPFGame
         {
             if (UserAnswer == User.Name)
                 return;
-            if (ButtonText == "Start new game" || UserAnswer == string.Empty)
+            if (ButtonText == ButtonTexts.Start || UserAnswer == string.Empty)
                 base.StartGame();
         }
     }

@@ -6,6 +6,7 @@ namespace WPFGame
     public class RelayCommand : ICommand
     {
         private Action action;
+
         public event EventHandler CanExecuteChanged = (sender, e) => { };
         
         /// <summary>

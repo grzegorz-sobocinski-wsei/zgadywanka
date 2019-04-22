@@ -21,7 +21,7 @@ namespace GameLogic
         public Random Random { get; set; }
         public int RandomNumber { get; set; }
         /// <summary>
-        /// True if console, false if WPF
+        /// Flag. True if console, false if WPF.
         /// </summary>
         public bool TypeOfGame { get; set; }
         /// <summary>
