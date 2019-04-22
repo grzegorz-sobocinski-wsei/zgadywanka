@@ -1,5 +1,4 @@
-﻿
-namespace WPFGame
+﻿namespace WPFGame
 {
     public static class ButtonTexts
     {

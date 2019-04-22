@@ -4,6 +4,7 @@ namespace WPFGame
 {
     public class Notifications : INotifications
     {
+        #region Private Fields
         /// <summary>
         /// Constants required for better look of the ArcadeClassic font.
         /// Without them notifications look like one word.
@@ -13,13 +14,18 @@ namespace WPFGame
 
         private string notification;
 
+        #endregion
+        #region Public Properties
+        /// <summary>
+        /// Notification used for getting the value out of this class.
+        /// </summary>
         public string Notification
         {
             get { return notification; }
-            set { notification = value.Replace(Space, DoubleSpace) }
+            set { notification = value.Replace(Space, DoubleSpace); }
         }
-
-
+        #endregion
+        #region Methods
         public void FirstQuestionText()
         {
             Notification = "I'm thinking of a number between 0-100, try to guess it!";
@@ -67,5 +73,6 @@ namespace WPFGame
             Notification = "Welcome! \nIf you want to quit and see your score " +
                 "then type in \"END\"." + "\nWhat's your name?";
         }
+        #endregion
     }
 }

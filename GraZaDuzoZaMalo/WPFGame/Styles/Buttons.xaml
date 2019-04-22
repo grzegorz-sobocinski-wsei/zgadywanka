@@ -3,11 +3,6 @@
     <!--  Base Button  -->
     <Style x:Key="BaseButton" TargetType="{x:Type Button}">
         <Setter Property="Foreground" Value="{StaticResource ButtonBackgroundBrush}" />
-        <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Padding" Value="1" />
-        <Setter Property="Background" Value="{StaticResource ButtonBackgroundBrush}" />
-        <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="Background" Value="{StaticResource ButtonBackgroundBrush}" />
         <Setter Property="Margin" Value="40,0,40,10" />
 
@@ -17,20 +12,15 @@
                     <Border
                         x:Name="border"
                         Background="{TemplateBinding Background}"
-                        BorderBrush="{StaticResource ButtonBackgroundBrush}"
-                        BorderThickness="0.5"
                         CornerRadius="30"
                         SnapsToDevicePixels="true">
                         <TextBlock
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
                             FontSize="40"
-                            Foreground="White"
                             Style="{StaticResource BaseTextBlock}"
                             Text="{TemplateBinding Content}"
-                            TextAlignment="Center"
-                            TextWrapping="WrapWithOverflow" />
+                            TextAlignment="Center" />
                     </Border>
+                    <!--  Animations  -->
                     <ControlTemplate.Triggers>
                         <EventTrigger RoutedEvent="MouseEnter">
                             <BeginStoryboard>
@@ -54,7 +44,6 @@
                                 </Storyboard>
                             </BeginStoryboard>
                         </EventTrigger>
-
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -65,36 +54,29 @@
 
     <!--  Base TextBox  -->
     <Style x:Key="BaseTextBox" TargetType="{x:Type TextBox}">
-        <Setter Property="Background" Value="{StaticResource TextBoxBackgroundBrush}" />
-        <Setter Property="TextAlignment" Value="Center" />
-        <Setter Property="BorderBrush" Value="{StaticResource BorderBackgroundBrush}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="TextBlock.FontFamily" Value="{StaticResource ArcadeClassic}" />
         <Setter Property="TextBlock.FontSize" Value="{StaticResource FontSizeRegular}" />
-        <Setter Property="BorderThickness" Value="5" />
         <Setter Property="Margin" Value="0,0,0,10" />
         <Setter Property="Template">
+
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
-                    <Grid>
-                        <Border
-                            x:Name="border"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="5"
-                            SnapsToDevicePixels="True">
-                            <ScrollViewer
-                                x:Name="PART_ContentHost"
-                                Focusable="false"
-                                HorizontalScrollBarVisibility="Hidden"
-                                VerticalScrollBarVisibility="Hidden" />
-                        </Border>
-
-                    </Grid>
-
+                    <Border
+                        x:Name="border"
+                        Background="{StaticResource TextBoxBackgroundBrush}"
+                        BorderBrush="{StaticResource BorderBackgroundBrush}"
+                        BorderThickness="5"
+                        CornerRadius="5"
+                        SnapsToDevicePixels="True">
+                        <!--  Functionality of a text inside  -->
+                        <ScrollViewer
+                            x:Name="PART_ContentHost"
+                            Focusable="false"
+                            HorizontalScrollBarVisibility="Hidden"
+                            VerticalScrollBarVisibility="Hidden" />
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
