@@ -9,7 +9,7 @@
         void NumberWasTooBigText();
         void NumberWasTooSmallText();
         void GameWonText(int randomNumber, int numberOfQuestions);
-        void GameOverText();
+        void GameOverText(int randomNumber);
         void ScoreInformationText(int numberOfGames, int numberOfWins);
         void NameIsEmpty();
     }

@@ -27,6 +27,7 @@ namespace WPFGame
             Random = new Random();
             Notifications = new Notifications();
             UserAnswerCommand = new RelayCommand(() => ButtonClicked());
+
             InitializeGame();
             Notification = Notifications.Notification;            
         }
@@ -87,7 +88,7 @@ namespace WPFGame
 
         public override void GameOver()
         {
-            Notifications.GameOverText();
+            Notifications.GameOverText(RandomNumber);
             ButtonText = ButtonTexts.Start;
             Notification = Notifications.Notification;
         }

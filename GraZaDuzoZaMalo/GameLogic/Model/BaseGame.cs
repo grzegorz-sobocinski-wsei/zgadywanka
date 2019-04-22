@@ -124,7 +124,7 @@ namespace GameLogic
         /// </summary>
         public virtual void GameOver()
         {
-            Notifications.GameOverText();
+            Notifications.GameOverText(RandomNumber);
             StartGame();
         }
         /// <summary>

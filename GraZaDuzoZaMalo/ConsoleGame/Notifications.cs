@@ -15,9 +15,9 @@ namespace ConsoleGame
             WriteLine("I'm thinking of a number between 0-100, try to guess it!");
         }
 
-        public void GameOverText()
+        public void GameOverText(int randomNumber)
         {
-            WriteLine("Sorry, you have no more questions left. Let's begin a new game!");
+            WriteLine(string.Format("Sorry, you have no more questions left. I was thinking of {0}. Let's start again!", randomNumber));
         }
 
         public void GameWonText(int randomNumber, int numberOfQuestions)
