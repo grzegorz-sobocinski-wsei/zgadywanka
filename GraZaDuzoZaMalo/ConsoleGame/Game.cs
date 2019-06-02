@@ -1,84 +1,150 @@
 ﻿using GameLogic;
+using GameLogic.Model;
+using GameLogic.Resources;
 using System;
 using static System.Console;
 
 namespace ConsoleGame
 {
-    public class Game : BaseGame
+    public class ConsoleGame : BaseGame, IGame
     {
-        #region Constructor
+        #region Public Methods
+
         /// <summary>
-        /// Default constructor.
+        /// Ask the user for his answer.
         /// </summary>
-        public Game()
+        public void AskUser()
         {
-            TypeOfGame = true;
-            Random = new Random();
-            Notifications = new Notifications();
-        }
-        #endregion
-        public override void AskUser()
-        {
-            CheckIfGuessIsNumber(ReadLine());
-
-            base.AskUser();
+            if (User.NumberOfQuestions < QuestionsLimit)
+            {
+                CheckAnswer(ReadLine());
+                AskUser();
+            }
+            else
+                GameOver();
         }
 
-        public override void CheckIfGuessIsNumber(string answer)
+        /// <summary>
+        /// Check if the user got the number right.
+        /// </summary>
+        public void CheckNumber()
         {
-            base.CheckIfGuessIsNumber(answer);
+            User.NumberOfQuestions++;
+
+            if (RandomNumber < UserAnswer)
+            {
+                WriteLine(Texts.NumberTooBig);
+            }
+
+            if (RandomNumber > UserAnswer)
+            {
+                WriteLine(Texts.NumberTooSmall);
+            }
+
+            if (RandomNumber == UserAnswer)
+            {
+                GameWon();
+            }
         }
 
-        public override void CheckNumber()
+        /// <summary>
+        /// Display the user's final score and close the application.
+        /// </summary>
+        public void EndGame()
         {
-            base.CheckNumber();
+            WriteLine(EndGameText());
+            ReadKey();
+            Environment.Exit(0);
         }
 
-        public override void EndGame()
+        /// <summary>
+        /// User lost after 7 tries.
+        /// Display the correct answer.
+        /// </summary>
+        public void GameOver()
         {
-            Notifications.ScoreInformationText(User.NumberOfGames, User.NumberOfWins);
+            WriteLine(GameOverText());
+            ReadKey();
+            ResetGame();
+        }
+
+        /// <summary>
+        /// User got the number right and won the game.
+        /// </summary>
+        public void GameWon()
+        {
+            User.NumberOfWins++;
+            WriteLine(GameWonText());
             ReadLine();
-            base.EndGame();
+            ResetGame();
         }
 
-        public override void GameOver()
+        /// <summary>
+        /// Check if the input was an number.
+        /// </summary>
+        /// <param name="userAnswer">User's input.</param>
+        public void CheckAnswer(string answer)
         {
-            base.GameOver();
+            if (answer == "END" && answer == "end")
+            {
+                EndGame();
+            }
+
+            // Check if user answer is a number within 0-100
+            int.TryParse(answer, out int number);
+            if (number >= MinimalGuess && number <= MaximalGuess && !string.IsNullOrEmpty(answer))
+            {
+                UserAnswer = number;
+                CheckNumber();
+                return;
+            }
+
+            WriteLine(Texts.InputIsNotNumber);
         }
 
-        public override void GameWon()
+        /// <summary>
+        /// Reset the game to default values.
+        /// </summary>
+        public void ResetGame()
         {
-            Notifications.GameWonText(RandomNumber, User.NumberOfQuestions);
-            base.GameWon();
+            RandomNumber = Random.Next(MinimalGuess, MaximalGuess);
+            User.NumberOfQuestions = 0;
+            User.NumberOfGames++;
+            StartGame();
         }
 
-        public override void InitializeGame()
+        /// <summary>
+        /// Begins the game with first question.
+        /// </summary>
+        public void StartGame()
         {
-            Notifications.WelcomeText();
+            WriteLine(Texts.FirstQuestion);
+            AskUser();
+        }
 
-            string userName = ReadLine();
+        /// <summary>
+        /// Creates new user based on user's input and starts the game.
+        /// </summary>
+        public void InitializeGame()
+        {
+            WriteLine(Texts.Welcome);
+            RandomNumber = Random.Next(MinimalGuess, MaximalGuess);
+            string input = ReadLine();
 
             // User's name cannot be empty.
-            if (!string.IsNullOrEmpty(userName))
-                User = new User(ReadLine());
+            if (!string.IsNullOrEmpty(input))
+            {
+                User = new User(input);
+            }
             else
             {
-                Notifications.NameIsEmpty();
+                WriteLine(Texts.NameIsEmpty);
                 InitializeGame();
             }
 
-            base.InitializeGame();
+            StartGame();
         }
 
-        public override void ResetGame()
-        {
-            base.ResetGame();
-        }
-
-        public override void StartGame()
-        {
-            base.StartGame();
-        }
-
+        #endregion Public Methods
     }
 }

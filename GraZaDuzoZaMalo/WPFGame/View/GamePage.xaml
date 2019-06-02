@@ -36,14 +36,16 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            
-            <TextBlock Grid.Row="0" Text="{Binding ScoreInformation}" Style="{StaticResource BaseTextBlock}"/>
-                       
+            <TextBlock
+                Grid.Row="0"
+                Style="{StaticResource BaseTextBlock}"
+                Text="{Binding ScoreInformation}" />
+
             <!--  Textbox  -->
             <TextBox
                 Grid.Row="1"
                 Style="{StaticResource BaseTextBox}"
-                Text="{Binding UserAnswer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                Text="{Binding UserInput}" />
 
             <!--  Button  -->
             <Button
@@ -52,6 +54,5 @@
                 Content="{Binding ButtonText}"
                 Style="{StaticResource BaseButton}" />
         </Grid>
-
     </Grid>
 </Page>

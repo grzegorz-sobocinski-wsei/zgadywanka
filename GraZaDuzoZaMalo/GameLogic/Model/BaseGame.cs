@@ -1,155 +1,77 @@
 ﻿using System;
-using System.ComponentModel;
 
 namespace GameLogic
 {
     /// <summary>
-    /// Base logic of the game. Implements INotifyPropertyChanged for WPF and Xamarin project. 
-    /// </summary>
-    public abstract class BaseGame : INotifyPropertyChanged
+    /// Contains common properties that are used in every game application version.
+    /// /// </summary>
+    public abstract class BaseGame
     {
         #region Constant Values
-        private const int MaximalGuess = 100;
-        private const int MinimalGuess = 0;
-        private const int QuestionsLimit = 7;
-        #endregion
-        #region Private Fields
-        private int userGuess;
-        #endregion
-        #region Public Properties
-        public User User { get; set; }
-        public Random Random { get; set; }
-        public int RandomNumber { get; set; }
-        /// <summary>
-        /// Flag. True if console, false if WPF.
-        /// </summary>
-        public bool TypeOfGame { get; set; }
-        /// <summary>
-        /// Contains platform specific notifications for the user.
-        /// </summary>
-        public INotifications Notifications { get;set; }
 
-        #endregion
-        #region Virtual Methods
         /// <summary>
-        /// Ask the user about his name. 
+        /// The highest number user can input.
         /// </summary>
-        public virtual void InitializeGame()
-        {
-            StartGame();
-        }
-        /// <summary>
-        /// Begins the game with the first question.
-        /// </summary>
-        public virtual void StartGame()
-        {
-            ResetGame();
-            Notifications.FirstQuestionText();
-            AskUser();
-        }
-        /// <summary>
-        /// Ask user of his answer and check if he was right or wrong.
-        /// </summary>
-        public virtual void AskUser()
-        {
-            // True if console game
-            // False if WPF game
-            if(TypeOfGame)
-            {
-                if (User.NumberOfQuestions < QuestionsLimit)
-                    AskUser();
-                else
-                    GameOver();
-            }
-            else
-            {
-                if (User.NumberOfQuestions < QuestionsLimit)
-                    return;
-                else
-                    GameOver();
-            }
-        }
-        /// <summary>
-        /// Check if the input was an number.
-        /// </summary>
-        /// <param name="userAnswer"></param>
-        public virtual void CheckIfGuessIsNumber(string answer)
-        {
-            // Guard clause
-            if (answer == null)
-                throw new ArgumentNullException("answer");
+        protected const int MaximalGuess = 100;
 
-            if (answer == "END")
-            {
-                EndGame();
-                return;
-            }
-            
-            // Check if user answer is a number within 0-100
-            int.TryParse(answer, out int number);
+        /// <summary>
+        /// The lowest number user can input.
+        /// </summary>
+        protected const int MinimalGuess = 0;
 
-            if (number >= MinimalGuess && number <= MaximalGuess && !string.IsNullOrEmpty(answer))
-            {
-                userGuess = number;
-                CheckNumber();
-                return;
-            }
+        /// <summary>
+        /// Amount of questions for one game.
+        /// </summary>
+        protected const int QuestionsLimit = 7;
 
-            Notifications.InputWasntNumberText();
-        }
-        /// <summary>
-        /// Check if the user got the number right.
-        /// </summary>
-        public virtual void CheckNumber()
-        {
-            User.NumberOfQuestions++;
+        #endregion Constant Values
 
-            if (RandomNumber < userGuess)
-                Notifications.NumberWasTooBigText();
-            if (RandomNumber > userGuess)
-                Notifications.NumberWasTooSmallText();
-            if (RandomNumber == userGuess)
-                GameWon();
-        }
+        #region Protected Fields
+
         /// <summary>
-        /// User got the number right and won the game.
+        /// User's input.
         /// </summary>
-        public virtual void GameWon()
-        {
-            User.NumberOfWins++;
-            StartGame();
-        }
+        protected int UserAnswer;
+
         /// <summary>
-        /// User lost after seven tries.
+        /// Current user of the game.
         /// </summary>
-        public virtual void GameOver()
-        {
-            Notifications.GameOverText(RandomNumber);
-            StartGame();
-        }
+        protected User User { get; set; }
+
         /// <summary>
-        /// Reset the game to default values.
+        /// Random number generator.
         /// </summary>
-        public virtual void ResetGame()
-        {
-            RandomNumber = Random.Next(MinimalGuess, MaximalGuess);
-            User.NumberOfQuestions = 0;
-            User.NumberOfGames++;
-        }
+        protected Random Random => new Random();
+
         /// <summary>
-        /// User typed in END. Output user score and end application.
+        /// Random number which user has to guess.
         /// </summary>
-        public virtual void EndGame()
+        protected int RandomNumber { get; set; }
+
+        #endregion Protected Fields
+
+        #region Public Methods
+
+        public string GameOverText()
         {
-            Environment.Exit(0);
+            return $"Sorry, you have no more questions left. I was thinking of {RandomNumber}. Let's start again!";
         }
-        #endregion
-        #region PropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged(string propertyName)
+
+        public string GameWonText()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            return $"That's correct! I was thinking of {RandomNumber}. You got it by {User.NumberOfQuestions} try. Let's begin a new game!";
         }
-        #endregion
+
+        public string EndGameText()
+        {
+            return $"You played {User.NumberOfGames} games and won {User.NumberOfWins}.";
+        }
+
+        public string ScoreInformationText()
+        {
+            return $"{User.Name}, you have played {User.NumberOfGames} games and won {User.NumberOfWins} of them.";
+        }
+
+        #endregion Public Methods
     }
 }

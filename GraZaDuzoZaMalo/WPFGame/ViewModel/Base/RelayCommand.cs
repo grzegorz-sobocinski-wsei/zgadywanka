@@ -8,7 +8,7 @@ namespace WPFGame
         private Action action;
 
         public event EventHandler CanExecuteChanged = (sender, e) => { };
-        
+
         /// <summary>
         /// Default constructor
         /// </summary>

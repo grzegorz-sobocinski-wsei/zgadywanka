@@ -61,7 +61,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\ButtonTexts.cs" />
+    <Compile Include="Resources\ButtonTexts.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ButtonTexts.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\Base\RelayCommand.cs" />
     <Compile Include="ViewModel\GameViewModel.cs" />
     <Compile Include="View\GamePage.xaml.cs" />
@@ -99,7 +103,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Notifications.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -116,6 +119,10 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ButtonTexts.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ButtonTexts.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Resource Include="Fonts\ARCADECLASSIC.TTF" />
     <None Include="packages.config" />

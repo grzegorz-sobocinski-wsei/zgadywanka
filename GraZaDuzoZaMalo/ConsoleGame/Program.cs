@@ -2,11 +2,11 @@
 {
     public class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
-            // Creates new game 
-            Game Game = new Game();
-            // Starts game
+            // Creates new game
+            ConsoleGame Game = new ConsoleGame();
+
             Game.InitializeGame();
         }
     }

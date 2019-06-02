@@ -12,5 +12,4 @@
         <Setter Property="FontSize" Value="{StaticResource FontSizeRegular}" />
         <Setter Property="FontFamily" Value="{StaticResource ArcadeClassic}" />
     </Style>
-
 </ResourceDictionary>

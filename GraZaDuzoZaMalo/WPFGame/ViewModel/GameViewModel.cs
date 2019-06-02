@@ -1,46 +1,55 @@
 ﻿using GameLogic;
+using GameLogic.Model;
+using GameLogic.Resources;
 using System;
+using System.ComponentModel;
+using WPFGame.Resources;
 
 namespace WPFGame
 {
-    public class GameViewModel : BaseGame
+    public class GameViewModel : BaseGame, IGame, INotifyPropertyChanged
     {
         #region Public Properties
+
         /// <summary>
         /// User input inside of a textbox. Empty by default.
         /// </summary>
-        public string UserAnswer { get; set; } = string.Empty;
+        public string UserInput { get; set; }
+
         /// <summary>
         /// Text seen by the user.
         /// </summary>
         public string Notification { get; set; }
+
         /// <summary>
-        /// Text displayed on the button. Default is register. 
+        /// Text displayed on the button. Default is register.
         /// </summary>
         public string ButtonText { get; set; } = ButtonTexts.Register;
-        public string ScoreInformation { get; set; } 
-        #endregion
+
+        #endregion Public Properties
+
         #region Commands
-        public RelayCommand UserAnswerCommand { get; set; }
-        #endregion
-        #region Constructor
+
         /// <summary>
-        /// Default constructor.
+        /// Invoked after user's click.
         /// </summary>
+        public RelayCommand UserAnswerCommand { get; set; }
+
+        #endregion Commands
+
+        #region Constructor
+
         public GameViewModel()
         {
-            // Flag. False, because it's WPF project.
-            TypeOfGame = false;
-
-            // Initialization 
-            Random = new Random();
-            Notifications = new Notifications();
             UserAnswerCommand = new RelayCommand(() => ButtonClicked());
-        
-            InitializeGame();
-            Notification = Notifications.Notification;            
+
+            Notification = Texts.Welcome;
         }
-        #endregion
+
+        #endregion Constructor
+
+        #region Public Methods
+
         /// <summary>
         /// Method invoked after button was clicked. The outcome of the method depends of the button text.
         /// </summary>
@@ -49,110 +58,172 @@ namespace WPFGame
             if (ButtonText == ButtonTexts.Register)
             {
                 ButtonText = ButtonTexts.Submit;
-                RegisterUser();
+                InitializeGame();
+                return;
             }
             if (ButtonText == ButtonTexts.Start)
             {
-                Notification = Notifications.Notification;
                 ButtonText = ButtonTexts.Submit;
-                base.InitializeGame();
+                StartGame();
             }
-            if (ButtonText == ButtonTexts.Submit && UserAnswer != string.Empty)
+            if (ButtonText == ButtonTexts.Submit && UserInput != string.Empty)
             {
                 AskUser();
             }
-
-            Notification = Notifications.Notification;
-
         }
-        public override void AskUser()
+
+        /// <summary>
+        /// Ask the user for his answer.
+        /// </summary>
+        public void AskUser()
         {
             // If user answer is empty then return and wait for ButtonClicked method.
-            if (UserAnswer == string.Empty)
+            if (string.IsNullOrEmpty(UserInput))
                 return;
 
-            base.AskUser();
+            if (User.NumberOfQuestions < QuestionsLimit)
+                CheckAnswer(UserInput);
+            else
+                GameOver();
+        }
 
-            // When the user got 7 questions wrong then return.
-            if (ButtonText == ButtonTexts.Start)
+        /// <summary>
+        /// Check if the user got the number right.
+        /// </summary>
+        public void CheckNumber()
+        {
+            User.NumberOfQuestions++;
+
+            if (RandomNumber < UserAnswer)
             {
-                UserAnswer = string.Empty;
-                return;
+                Notification = Texts.NumberTooBig;
             }
 
-            CheckIfGuessIsNumber(UserAnswer);
+            if (RandomNumber > UserAnswer)
+            {
+                Notification = Texts.NumberTooSmall;
+            }
+
+            if (RandomNumber == UserAnswer)
+            {
+                GameWon();
+            }
+
+            UserInput = string.Empty;
         }
 
-        public override void CheckIfGuessIsNumber(string answer)
+        /// <summary>
+        /// Display the user's final score and close the application.
+        /// </summary>
+        public void EndGame()
         {
-            base.CheckIfGuessIsNumber(answer);
-
-            // Assign string values
-            Notification = Notifications.Notification;
-            UserAnswer = string.Empty;
+            Notification = EndGameText();
+            Environment.Exit(0);
         }
 
-        public override void CheckNumber()
-        {
-            base.CheckNumber();
-        }
-
-        public override void EndGame()
-        {
-            Notifications.ScoreInformationText(User.NumberOfGames, User.NumberOfWins);
-            base.EndGame();
-        }
-
-        public override void GameOver()
-        {
-            // Assign string values.
-            Notifications.GameOverText(RandomNumber);
-            ButtonText = ButtonTexts.Start;
-            Notification = Notifications.Notification;
-        }
-
-        public override void GameWon()
+        /// <summary>
+        /// User lost after 7 tries.
+        /// Display the correct answer.
+        /// </summary>
+        public void GameOver()
         {
             // Assign string values.
-            Notifications.GameWonText(RandomNumber, User.NumberOfQuestions);
+            Notification = GameOverText();
+            ResetGame();
+        }
+
+        /// <summary>
+        /// User got the number right and won the game.
+        /// </summary>
+        public void GameWon()
+        {
+            // Assign string values.
+            Notification = GameWonText();
             ButtonText = ButtonTexts.Start;
             ResetGame();
         }
 
-        public override void InitializeGame()
+        /// <summary>
+        /// Reset the game to default values.
+        /// </summary>
+        public void ResetGame()
         {
-            Notifications.WelcomeText();
+            // Reset the values to default.
+            RandomNumber = Random.Next(MinimalGuess, MaximalGuess);
+            UserInput = string.Empty;
+            User.NumberOfQuestions = 0;
+            User.NumberOfGames++;
+            ButtonText = ButtonTexts.Start;
         }
-        public void RegisterUser()
+
+        /// <summary>
+        /// Begins the game with first question.
+        /// </summary>
+        public void StartGame()
+        {
+            RandomNumber = Random.Next(MinimalGuess, MaximalGuess);
+
+            if (ButtonText == ButtonTexts.Start || UserInput == string.Empty)
+            {
+                Notification = Texts.FirstQuestion;
+                AskUser();
+            }
+        }
+
+        /// <summary>
+        /// Creates new user based on user's input and starts the game.
+        /// </summary>
+        public void InitializeGame()
         {
             // User's name cannot be empty.
-            if (!string.IsNullOrEmpty(UserAnswer))
+            if (!string.IsNullOrEmpty(UserInput))
             {
-                User = new User(UserAnswer);
-                UserAnswer = string.Empty;
+                User = new User(UserInput);
+                UserInput = string.Empty;
             }
             else
             {
-                Notifications.NameIsEmpty();
+                Notification = Texts.NameIsEmpty;
                 return;
             }
 
-            base.InitializeGame();
+            StartGame();
         }
 
-        public override void ResetGame()
+        /// <summary>
+        /// Check if the input was an number.
+        /// </summary>
+        /// <param name="userAnswer">User's input.</param>
+        public void CheckAnswer(string answer)
         {
-            // Inform the user about his score. 
-            ScoreInformation = string.Format("{0}, you have played {1} games and won {2} of them.", User.Name, User.NumberOfGames, User.NumberOfWins);
-            base.ResetGame();
-        }
+            if (answer == "END" && answer == "end")
+            {
+                EndGame();
+            }
 
-        public override void StartGame()
-        {
-            if (UserAnswer == User.Name)
+            // Check if user answer is a number within 0-100
+            int.TryParse(answer, out int number);
+            if (number >= MinimalGuess && number <= MaximalGuess && !string.IsNullOrEmpty(answer))
+            {
+                UserAnswer = number;
+                CheckNumber();
                 return;
-            if (ButtonText == ButtonTexts.Start || UserAnswer == string.Empty)
-                base.StartGame();
+            }
+
+            Notification = Texts.InputIsNotNumber;
         }
+
+        #endregion Public Methods
+
+        #region Property Changed
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion Property Changed
     }
 }

@@ -11,5 +11,4 @@
 
     <Color x:Key="TextBoxBackground">#DCE6ED</Color>
     <SolidColorBrush x:Key="TextBoxBackgroundBrush" Color="{StaticResource TextBoxBackground}" />
-
 </ResourceDictionary>

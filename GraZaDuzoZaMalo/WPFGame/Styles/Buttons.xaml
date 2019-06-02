@@ -47,9 +47,7 @@
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
-
         </Setter>
-
     </Style>
 
     <!--  Base TextBox  -->
@@ -81,5 +79,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 </ResourceDictionary>
